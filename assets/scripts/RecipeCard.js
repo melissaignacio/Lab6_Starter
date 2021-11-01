@@ -1,8 +1,9 @@
 class RecipeCard extends HTMLElement {
   constructor() {
     // Part 1 Expose - TODO
-
+    super();
     // You'll want to attach the shadow DOM here
+    let shadow = this.attachShadow({mode: 'open'});
   }
 
   set data(data) {
@@ -100,6 +101,66 @@ class RecipeCard extends HTMLElement {
     // created in the constructor()
 
     // Part 1 Expose - TODO
+    const image1 = document.createElement('img');
+    const par1 = document.createElement('p');
+    const a1 = document.createElement('a');
+    const par2 = document.createElement('p');
+    const div1 = document.createElement('div');
+    const span1 = document.createElement('span');
+    const image2 = document.createElement('img');
+    const span2 = document.createElement('span');
+    const time1 = document.createElement('time');
+    const par3 = document.createElement('p');
+
+
+    card.appendChild(image1);
+    card.appendChild(par1);
+    par1.appendChild(a1);
+    card.appendChild(par2);
+    card.appendChild(div1);
+    div1.appendChild(span1);
+    card.appendChild(time1);
+    card.appendChild(par3);
+         
+
+    image1.setAttribute ('src', searchForKey(data,"thumbnailUrl"))
+    image1.setAttribute ('alt', searchForKey(data,"headline"))
+
+    par1.setAttribute('class', 'title');
+    a1.setAttribute ('href', getUrl(data))
+    var textToAdd1 = document.createTextNode(searchForKey(data,"headline"));
+    a1.appendChild(textToAdd1);
+    
+
+    par2.setAttribute('class', 'organization');
+    var textToAdd2 = document.createTextNode(getOrganization(data));
+    par2.appendChild(textToAdd2); 
+
+    div1.setAttribute('class', 'rating');
+
+    var textToAdd3;
+    var x1 = searchForKey(data,"ratingValue");
+    if(x1  == undefined){
+      textToAdd3 = document.createTextNode("No reviews")
+      span1.appendChild(textToAdd3);
+    }
+    else{
+      div1.appendChild(image2);
+      div1.appendChild(span2);
+      // textToAdd3 = document.createTextNode();
+    }
+    
+    var textToAdd4 = document.createTextNode(convertTime(searchForKey(data,"totalTime")));
+    time1.appendChild(textToAdd4);
+
+    par3.setAttribute('class', 'ingredients');
+    var textToAdd5 = document.createTextNode(createIngredientList(searchForKey(data,"recipeIngredient")));
+    par3.appendChild(textToAdd5);
+    console.log(card);
+
+    this.shadowRoot.appendChild(styleElem);
+    this.shadowRoot.appendChild(card);
+
   }
 }
 
