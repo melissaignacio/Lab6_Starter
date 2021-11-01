@@ -24,6 +24,9 @@ async function init() {
     console.log('Recipe fetch unsuccessful');
     return;
   };
+
+  console.log(recipeData);
+  console.log(Object.keys(recipeData));
   // Add the first three recipe cards to the page
   createRecipeCards();
   // Make the "Show more" button functional
@@ -42,7 +45,29 @@ async function fetchRecipes() {
     // For part 2 - note that you can fetch local files as well, so store any JSON files you'd like to fetch
     // in the recipes folder and fetch them from there. You'll need to add their paths to the recipes array.
 
+
     // Part 1 Expose - TODO
+
+    for (let i = 0; i < recipes.length; i++)
+    {
+      fetch(recipes[i]).then(response => {
+        // console.log(response);
+        return response.json();
+      })
+      .then(result => {
+        // console.log(result);
+        recipeData[recipes[i]] = result;
+        if(i == recipes.length -1)
+        {
+            resolve(true);
+        }
+      }).catch(err => {
+        console.log("Error fetching API", err);
+        reject(false);
+      })
+    }
+    
+    
   });
 }
 
@@ -54,6 +79,14 @@ function createRecipeCards() {
   // show any others you've added when the user clicks on the "Show more" button.
 
   // Part 1 Expose - TODO
+  for(let p in recipeData){
+    const element = document.createElement('recipe-card');
+    element.data = recipeData[p];
+    document.getElementsByTagName('main')[0].appendChild(element);
+    
+  };
+
+
 }
 
 function bindShowMore() {
