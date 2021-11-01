@@ -145,8 +145,38 @@ class RecipeCard extends HTMLElement {
       span1.appendChild(textToAdd3);
     }
     else{
+      var round = Math.round(searchForKey(data,"ratingValue"));
+      var hello = round + " ";
+      var why = searchForKey(data,"ratingCount") + " ";
+      span2.appendChild(document.createTextNode(why));
+      span1.appendChild(document.createTextNode(hello));
       div1.appendChild(image2);
       div1.appendChild(span2);
+      if(round == 0){
+        image2.setAttribute('src', "assets/images/icons/0-star.svg");
+        image2.setAttribute('alt', "0 stars");
+      }
+      else if(round == 1) {
+        image2.setAttribute ('src', "assets/images/icons/1-star.svg");
+        image2.setAttribute ('alt', "1 stars");
+      }
+      else if(round == 2) {
+        image2.setAttribute ('src', "assets/images/icons/2-star.svg");
+        image2.setAttribute ('alt', "2 stars");
+      }
+      else if(round == 3) {
+        image2.setAttribute ('src', "assets/images/icons/3-star.svg");
+        image2.setAttribute ('alt', "3 stars");
+
+      }
+      else if(round == 4) {
+        image2.setAttribute ('src', "assets/images/icons/4-star.svg");
+        image2.setAttribute ('alt', "4 stars");
+      }
+      else if(round == 5) {
+        image2.setAttribute ('src', "assets/images/icons/5-star.svg");
+        image2.setAttribute ('alt', "5 stars");
+      }
       // textToAdd3 = document.createTextNode();
     }
     
